@@ -1,6 +1,6 @@
 # Introduction
 
-This repository contains project codes for [**codeforthekingdom.org**](codeforthekingdom.org) jakarta hackaton by the contributors.
+This repository contains project codes for [**codeforthekingdom.org**](http://codeforthekingdom.org) jakarta hackaton by the contributors.
 
 # Directory structure
 
