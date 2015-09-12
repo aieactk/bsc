@@ -9,3 +9,10 @@ autopublish
 insecure
 kadira:flow-router
 kadira:blaze-layout
+aldeed:collection2
+matb33:collection-hooks
+underscore
+accounts-password
+useraccounts:flow-routing
+semantic:ui
+flemay:less-autoprefixer
