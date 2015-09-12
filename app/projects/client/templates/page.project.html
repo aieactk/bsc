@@ -1,0 +1,18 @@
+<template name="listProject">
+  <div class="ui container">
+    <div class="ui four stackable cards">
+      {{#each name}}
+      <div class="card">
+        <div class="image">
+          <img src="/img/{{coverImage}}">
+        </div>
+        <div class="content">
+          <div class="header"><a href="/project/{{_id._str}}">{{title}}</a></div>
+          <div class="description">{{description.toString.substring 0 150}}</div>
+        </div>
+        <div class="extra content"><i class="dollar icon"></i>{{pledgeMoney}}</div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</template>
