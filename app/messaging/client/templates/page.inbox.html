@@ -1,0 +1,13 @@
+<template name="messagingPageInbox">
+  <h1>Message Inbox</h1>
+  <ul class="ui list">
+    {{#each messages}}
+    <li>{{from.id}}<button class="remove-message">X</button></li>
+    {{/each}}
+  </ul>
+  <div class="">
+    <a href="/account/messages/compose">
+      <i class="big plus icon circular"></i>
+    </a>
+  </div>
+</template>

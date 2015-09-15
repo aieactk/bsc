@@ -1,6 +1,8 @@
 FlowRouter.route('/hello/:name', {
-  name: 'hello',
+  name: 'securityPageLogin',
   action: function(params) {
-    BlazeLayout.render('defaultIndex', {content: 'securityPageLogin'});
+    BlazeLayout.render('defaultIndex', {
+      content: 'securityPageLogin'
+    });
   }
 });
