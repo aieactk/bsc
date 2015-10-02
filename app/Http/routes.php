@@ -24,3 +24,7 @@ Route::get('/create-project', function(){
 Route::post('/submit-project', 'ProjectController@createProject');
 
 Route::get('/project/{projectID}', 'ProjectController@viewDetail');
+
+Route::get('/edit-project/{projectID}', 'ProjectController@viewEditDetail');
+
+Route::post('/update-project', 'ProjectController@updateProject');
