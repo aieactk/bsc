@@ -1,5 +1,6 @@
 @extends('layouts.master')
-@section('contents')
+
+@section('content')
 <h1>This is List Project</h1>
 <div class="ui four stackable cards">
     @foreach ($projects as $project)
