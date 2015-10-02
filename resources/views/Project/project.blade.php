@@ -18,7 +18,7 @@
             <div class="description">{!! str_limit($project->description, $limit = 450, $end = '...') !!}</div>
           </div>
           <div class="extra content"><i class="dollar icon"></i>{{$project->goal}}</div>
-          <div class="extra content"><i class="dollar icon"></i>{{$project->duration}}</div>
+          <div class="extra content"><i class="calendar icon"></i>{{$project->duration}} Day(s)</div>
         </div>
         @endforeach
       </div>
