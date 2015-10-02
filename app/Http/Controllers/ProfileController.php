@@ -11,17 +11,34 @@ use Illuminate\Http\Request;
  */
 class ProfileController extends Controller
 {
-    public function index($id=null) 
+    /**
+     * View on profile
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function index() 
     {
-        if($id === null) {
-            $user = \Auth::user();
-        } else {
-            $user = \App\User::findOrFail(1);
-        }
-        
-        return view('profile/index', ['user'=>$user]);
+        return view('profile/index', ['user'=>\Auth::user()]);
     }
     
+    /**
+     * View member profile
+     * 
+     * @param string $id
+     * @return \Illuminate\View\View
+     */
+    public function view($id)
+    {
+        $user = \App\User::findOrFail($id);
+        return view('profile/view', [ 'user' => $user ]);
+    }
+    
+    /**
+     * Save profile
+     * 
+     * @param Request $req
+     * @return \Illuminate\View\View
+     */
     public function save(Request $req)
     {
         $this->validate($req, [
@@ -43,6 +60,12 @@ class ProfileController extends Controller
         return view('profile/index', ['user'=>$user]);
     }
     
+    /**
+     * Save profile picture
+     * 
+     * @param Request $req
+     * @return \Illuminate\View\View
+     */
     public function image(Request $req)
     {
         $file = $req->file('image');
