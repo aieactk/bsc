@@ -85,9 +85,9 @@
                     <div class="column">
                         <h5 class="ui inverted header">Designed By</h5>
                         <addr>
-                            <a class="item" href="http://scripteden.com"><img src="images/scripteden-logo-g.png" alt="Logo" style="height:20px" /></a>  <br/>         
+                            <a class="item" href="http://scripteden.com"><img src="images/scripteden-logo-g.png" alt="Logo" style="height:20px" /></a>  <br/>
                             <a href="http://scripteden.com/downloads/bootstrap/">Bootstrap Templates</a>           <br/>
-                            <a href="http://scripteden.com/downloads/semantic-ui/">Semantic UI Templates</a>           
+                            <a href="http://scripteden.com/downloads/semantic-ui/">Semantic UI Templates</a>
                         </addr>
 
 
@@ -106,4 +106,3 @@
         @show
     </body>
 </html>
-
