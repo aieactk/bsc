@@ -36,3 +36,4 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('/profile', 'ProfileController@index');
 Route::post('/profile', 'ProfileController@save');
 Route::post('/profile/image', 'ProfileController@image');
+Route::get('/members/{id}', 'ProfileController@view');
