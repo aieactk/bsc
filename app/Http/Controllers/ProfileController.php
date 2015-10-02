@@ -42,4 +42,17 @@ class ProfileController extends Controller
         
         return view('profile/index', ['user'=>$user]);
     }
+    
+    public function image(Request $req)
+    {
+        $file = $req->file('image');
+        if($file->isValid()) {
+            $user = \Auth::user();
+            $target = base_path('public/upload/profile/'.date('Y/m/d'));
+            $file->move($target, $user->_id.'.jpg');
+            $user->image = '/upload/profile/'.date('Y/m/d/').$user->_id.'.jpg';
+            $user->save();
+            return redirect('/profile');
+        }
+    }
 }

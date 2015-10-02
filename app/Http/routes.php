@@ -35,3 +35,4 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 // Profile
 Route::get('/profile', 'ProfileController@index');
 Route::post('/profile', 'ProfileController@save');
+Route::post('/profile/image', 'ProfileController@image');
