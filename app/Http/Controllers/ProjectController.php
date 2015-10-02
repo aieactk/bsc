@@ -23,6 +23,11 @@ class ProjectController extends Controller
       return view('Project/project', ['projects' => $projects]);//
     }
 
+    public function createProjectForm()
+    {
+      return view('Project/createProject');
+    }
+
     public function viewDetail($projectID)
     {
       $detProject = Project::findOrFail($projectID);
@@ -52,14 +57,35 @@ class ProjectController extends Controller
       $project->duration = $request->duration;
       $project->save();
 
-      return redirect('Project/projects'); //
+      return redirect('projects'); //
     }
 
-    public function editProject($projectID)
+    public function viewEditDetail($projectID)
     {
       $detProject = Project::findOrFail($projectID);
 
       return view('Project/editProject', compact('detProject'));
+    }
+
+    public function updateProject(Request $request)
+    {
+      $id = $request->input('id');
+      $detProject = Project::findOrFail($id);
+
+      $image = $request->file('mainImage');
+      $filename = time() . '-' . $image->getClientOriginalName();
+      $path = public_path('image/' . $filename);
+      $destPath = public_path('image/');
+      $request->file('mainImage')->move($destPath, $filename);
+
+      $detProject->mainImage = $filename;
+      $detProject->category = $request->input('category');
+      $detProject->description = $request->input('description');
+      //$project->goal = $request->goal;
+      //$project->duration = $request->duration;
+      $detProject->save();
+
+      return redirect('project/'.$id);
     }
 
     /**
