@@ -55,7 +55,7 @@
             </div>
             {!! csrf_field() !!}
             @if(Auth::user() === $user)
-            <button class="ui button success">Save</button>
+            <button class="ui button green">Save</button>
             
             @endif
         </form>
