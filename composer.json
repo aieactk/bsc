@@ -7,9 +7,13 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
+<<<<<<< HEAD
         "jenssegers/mongodb": "^2.2",
         "jenssegers/mongodb-session": "^1.1",
         "jenssegers/mongodb-sentry": "^1.0"
+=======
+        "jenssegers/mongodb": "^2.2"
+>>>>>>> 01994983fc46d4eb3539483e92260749e60127ea
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

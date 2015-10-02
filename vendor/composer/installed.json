@@ -3071,6 +3071,7 @@
             "mongo",
             "mongodb"
         ]
+<<<<<<< HEAD
     },
     {
         "name": "jenssegers/mongodb-session",
@@ -3267,5 +3268,7 @@
             "mongodb",
             "sentry"
         ]
+=======
+>>>>>>> 01994983fc46d4eb3539483e92260749e60127ea
     }
 ]

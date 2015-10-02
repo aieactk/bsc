@@ -1040,11 +1040,14 @@ return array(
     'Jenssegers\\Mongodb\\Relations\\MorphTo' => $vendorDir . '/jenssegers/mongodb/src/Jenssegers/Mongodb/Relations/MorphTo.php',
     'Jenssegers\\Mongodb\\Schema\\Blueprint' => $vendorDir . '/jenssegers/mongodb/src/Jenssegers/Mongodb/Schema/Blueprint.php',
     'Jenssegers\\Mongodb\\Schema\\Builder' => $vendorDir . '/jenssegers/mongodb/src/Jenssegers/Mongodb/Schema/Builder.php',
+<<<<<<< HEAD
     'Jenssegers\\Mongodb\\Sentry\\Group' => $vendorDir . '/jenssegers/mongodb-sentry/src/Jenssegers/Mongodb/Sentry/Group.php',
     'Jenssegers\\Mongodb\\Sentry\\Throttle' => $vendorDir . '/jenssegers/mongodb-sentry/src/Jenssegers/Mongodb/Sentry/Throttle.php',
     'Jenssegers\\Mongodb\\Sentry\\User' => $vendorDir . '/jenssegers/mongodb-sentry/src/Jenssegers/Mongodb/Sentry/User.php',
     'Jenssegers\\Mongodb\\Session\\SessionManager' => $vendorDir . '/jenssegers/mongodb-session/src/Jenssegers/Mongodb/Session/SessionManager.php',
     'Jenssegers\\Mongodb\\Session\\SessionServiceProvider' => $vendorDir . '/jenssegers/mongodb-session/src/Jenssegers/Mongodb/Session/SessionServiceProvider.php',
+=======
+>>>>>>> 01994983fc46d4eb3539483e92260749e60127ea
     'League\\Flysystem\\AdapterInterface' => $vendorDir . '/league/flysystem/src/AdapterInterface.php',
     'League\\Flysystem\\Adapter\\AbstractAdapter' => $vendorDir . '/league/flysystem/src/Adapter/AbstractAdapter.php',
     'League\\Flysystem\\Adapter\\AbstractFtpAdapter' => $vendorDir . '/league/flysystem/src/Adapter/AbstractFtpAdapter.php',

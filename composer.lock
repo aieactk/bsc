@@ -4,8 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "b30534f5a82add4e9e0827e03a63efdf",
     "content-hash": "c4fed15fef98a630a9e1b296e64af033",
+=======
+    "hash": "eacefe12267ad37d33e63405ad30e625",
+    "content-hash": "bbc45ba5af59815a262566b000e2b36f",
+>>>>>>> 01994983fc46d4eb3539483e92260749e60127ea
     "packages": [
         {
             "name": "cartalyst/sentry",
@@ -462,6 +467,7 @@
             "time": "2015-09-24 10:39:44"
         },
         {
+<<<<<<< HEAD
             "name": "jenssegers/mongodb-sentry",
             "version": "v1.0.1",
             "source": {
@@ -552,6 +558,8 @@
             "time": "2015-01-30 14:14:09"
         },
         {
+=======
+>>>>>>> 01994983fc46d4eb3539483e92260749e60127ea
             "name": "jeremeamia/SuperClosure",
             "version": "2.1.0",
             "source": {
