@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/projects', 'ProjectController@index');
+
+Route::get('/create-project', function(){
+  return view('Project/createProject');
+});
+
+Route::post('/submit-project', 'ProjectController@createProject');
+
+Route::get('/project/{projectID}', 'ProjectController@viewDetail');
