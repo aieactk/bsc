@@ -34,8 +34,7 @@
     </div>
     <div class="field">
       <div class="ui left icon input">
-        <input type="text" id="datepicker" name="endDate" placeholder="End of Funding">
-        <!-- <input name="duration" type="number" placeholder="Funding Duration in Days"> -->
+        <input type="text" id="datepicker" name="endDate" placeholder="End of Funding (dd/mm/yyyy)">
         <i class="calendar icon"></i>
       </div>
     </div>
@@ -47,11 +46,6 @@
 </div>
 @endsection
 @section('javascripts')
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
-
 <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
 <script>tinymce.init({selector:'textarea'});</script>
 
@@ -64,7 +58,6 @@ $("document").ready(function(){
       $("#fake-file-path").val($("#file").val().replace(/C:\\fakepath\\/i, ''));;
     });
 });
-
 
 </script>
 @endsection

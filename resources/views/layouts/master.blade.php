@@ -9,6 +9,8 @@
         <title>Blessing Supply Chain - @yield('title')</title>
         @section('styles')
         <link rel="stylesheet" href="//cdn.jsdelivr.net/semantic-ui/2.1.4/semantic.min.css">
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//cdn.jsdelivr.net/semantic-ui/2.1.4/semantic.min.js"></script>
         <link rel="stylesheet" href="/css/main.css">
         @show
     </head>
@@ -23,7 +25,7 @@
                         </a>
                         <a class="{{ Request::path() === '/' ? 'active' : '' }} item"
                            href="/">
-                            <i class="home icon"></i> Home 
+                            <i class="home icon"></i> Home
                         </a>
                         <a class="{{ Request::path() === '/projects' ? 'active' : '' }} item"
                            href="/projects">

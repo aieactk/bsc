@@ -13,17 +13,15 @@
 
 Route::get('/', 'HomeController@index');
 
+//Project routes..
 Route::get('/projects', 'ProjectController@index');
-
 Route::get('/create-project', 'ProjectController@createProjectForm');
-
 Route::post('/submit-project', 'ProjectController@createProject');
-
 Route::get('/project/{projectID}', 'ProjectController@viewDetail');
-
 Route::get('/edit-project/{projectID}', 'ProjectController@viewEditDetail');
-
 Route::post('/update-project', 'ProjectController@updateProject');
+Route::get('/delete-project/{id}', 'ProjectController@deleteProject');
+
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

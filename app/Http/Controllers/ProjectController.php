@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 //use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use Auth;
 
 class ProjectController extends Controller
 {
@@ -18,14 +19,19 @@ class ProjectController extends Controller
      */
     public function index()
     {
-      $projects = Project::all();
+      $projects = Project::all()->where('statusProject', '!=', 'deleted');
 
       return view('Project/project', ['projects' => $projects]);//
     }
 
     public function createProjectForm()
     {
-      return view('Project/createProject');
+      if(Auth::check()){
+        return view('Project/createProject');
+      }
+      else{
+        return redirect('auth/login');
+      }
     }
 
     public function viewDetail($projectID)
@@ -42,105 +48,83 @@ class ProjectController extends Controller
      */
     public function createProject(Request $request)
     {
-      $image = $request->file('mainImage');
-      $filename = time() . '-' . $image->getClientOriginalName();
-      $path = public_path('image/' . $filename);
-      $destPath = public_path('image/');
-      $request->file('mainImage')->move($destPath, $filename);
+      if(Auth::check())
+      {
+        $image = $request->file('mainImage');
+        $filename = time() . '-' . $image->getClientOriginalName();
+        $path = public_path('image/' . $filename);
+        $destPath = public_path('image/');
+        $request->file('mainImage')->move($destPath, $filename);
 
-      $project = new Project;
-      $project->title = $request->title;
-      $project->mainImage = $filename;
-      $project->category = $request->category;
-      $project->description = $request->description;
-      $project->goal = $request->goal;
-      $project->duration = $request->duration;
-      $project->save();
+        $user = Auth::user();
 
-      return redirect('projects'); //
+        $project = new Project;
+        $project->title = $request->title;
+        $project->mainImage = $filename;
+        $project->created_by = $user->_id;
+        $project->category = $request->category;
+        $project->description = $request->description;
+        $project->goal = $request->goal;
+        $project->duration = $request->duration;
+        $project->save();
+
+        return redirect('projects'); //
+      }
+      else{
+        return redirect('auth/login');
+      }
     }
 
     public function viewEditDetail($projectID)
     {
-      $detProject = Project::findOrFail($projectID);
+      if(Auth::check())
+      {
+        $detProject = Project::findOrFail($projectID);
 
-      return view('Project/editProject', compact('detProject'));
+        return view('Project/editProject', compact('detProject'));
+      }
+      else {
+        return redirect('auth/login');
+      }
     }
 
     public function updateProject(Request $request)
     {
-      $id = $request->input('id');
-      $detProject = Project::findOrFail($id);
+      if(Auth::check()){
+        $id = $request->input('id');
+        $detProject = Project::findOrFail($id);
 
-      $image = $request->file('mainImage');
-      $filename = time() . '-' . $image->getClientOriginalName();
-      $path = public_path('image/' . $filename);
-      $destPath = public_path('image/');
-      $request->file('mainImage')->move($destPath, $filename);
+        $image = $request->file('mainImage');
+        $filename = time() . '-' . $image->getClientOriginalName();
+        $path = public_path('image/' . $filename);
+        $destPath = public_path('image/');
+        $request->file('mainImage')->move($destPath, $filename);
 
-      $detProject->mainImage = $filename;
-      $detProject->category = $request->input('category');
-      $detProject->description = $request->input('description');
-      //$project->goal = $request->goal;
-      //$project->duration = $request->duration;
-      $detProject->save();
+        $detProject->mainImage = $filename;
+        $detProject->category = $request->input('category');
+        $detProject->description = $request->input('description');
+        //$project->goal = $request->goal;
+        //$project->duration = $request->duration;
+        $detProject->save();
 
-      return redirect('project/'.$id);
+        return redirect('project/'.$id);
+      }
+      else{
+        return redirect('auth/login');
+      }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function deleteProject($id)
     {
-        //
-    }
+      if(Auth::check()){
+        $detProject = Project::findOrFail($id);
+        $detProject->statusProject = 'deleted';
+        $detProject->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect('projects');
+      }
+      else{
+        return redirect('auth/login');
+      }
     }
 }

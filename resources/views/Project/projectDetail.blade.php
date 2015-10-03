@@ -34,6 +34,13 @@
             <i class="google plus icon"></i>
           </button>
         </a>
+        <p>&nbsp;</p>
+        <a href="/delete-project/{{$detProject->_id}}">
+            <button class="ui circular negative remove icon button">
+            <i class="remove icon"></i>
+            Delete Project
+          </button>
+        </a>
       </div>
     </div>
   </body>
