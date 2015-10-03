@@ -3,16 +3,31 @@
 <h1>This is List Project</h1>
 <div class="ui four stackable cards">
     @foreach ($projects as $project)
-    <div class="card">
-        <div class="image">
-            <img src="{!! asset('image/' . $project->mainImage) !!}">
+    <div class="ui card">
+        <div class="blurring dimmable image">
+            <div class="ui dimmer transition hidden">
+                <div class="content">
+                    <div class="center">
+                        <div class="ui inverted button">Call to Action</div>
+                    </div>
+                </div>
+            </div>
+            <img src="{!! asset('image/' . $project->mainImage) !!}" />
         </div>
         <div class="content">
-          <div class="header"><a href="/project/{{$project->_id}}">{{$project->title}}</a></div>
-          <div class="description">{!! str_limit($project->description, $limit = 450, $end = '...') !!}</div>
+            <a class="header" href="/project/{{$project->_id}}">{{$project->title}}</a>
+            <div class="meta">
+                <span class="date">
+                    {!! str_limit($project->description, $limit = 150, $end = '...') !!}
+                </span>
+            </div>
         </div>
-        <div class="extra content"><i class="dollar icon"></i>{{$project->goal}}</div>
-        <div class="extra content"><i class="calendar icon"></i>{{$project->duration}} Day(s)</div>
+        <div class="extra content">
+            <i class="dollar icon"></i>Rp. {{$project->goal}}
+            <a>
+                <i class="calendar icon"></i>Until {{$project->duration}}
+            </a>
+        </div>
     </div>
     @endforeach
 </div>
