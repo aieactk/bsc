@@ -54,7 +54,7 @@ class MessageController extends Controller
     
     public function respond(Request $req, $id)
     {
-        $context  = \App\Message::findOrFail($id);
+        $context  = Message::findOrFail($id);
         Message::create(array(
             'to'      => $context->fromMember->_id,
             'sender'  => \Auth::user()->_id, 
