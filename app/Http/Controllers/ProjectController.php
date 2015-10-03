@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -25,11 +24,17 @@ class ProjectController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $projects = Project::where('statusProject', '!=', 'deleted')
-                ->get();
+    public function index(Request $req) {
+        $cat = $req->get('category');
+        $projects = Project::where('statusProject', '!=', 'deleted');
 
-        return view('Project/project', ['projects' => $projects]); //
+        if (!empty($cat) && $cat !== 'all')
+            $projects->where('category', '=', $cat);
+
+        $data = $projects->get();
+            
+
+        return view('Project/project', ['projects' => $data]); 
     }
 
     public function createProjectForm() {
