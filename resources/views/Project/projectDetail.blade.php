@@ -31,7 +31,7 @@ return false;">
             </button>
         </a>
         <p>&nbsp;</p>
-        @if(Auth::check() && $detProject->created_by === Auth::user)
+        @if(Auth::check() && $detProject->created_by === Auth::user()->_id)
         <a href="/delete-project/{{$detProject->_id}}">
             <button class="ui circular negative remove icon button">
                 <i class="remove icon"></i>
@@ -39,6 +39,14 @@ return false;">
             </button>
         </a>
         @endif
+    </div>
+    <div class="ui modal">
+      <div class="header">Payment</div>
+      <div class="content">
+        <input type="text" name="creditCardName" placeholder="Credit Card Name">
+        <p></p>
+        <p></p>
+      </div>
     </div>
     <div id="disqus_thread" class="sixteen wide column"></div>
 </div>
