@@ -45,7 +45,7 @@ return false;">
       <div class="header">
         Donation Amount
       </div>
-      <form action="/donate" method="post">
+      <form action="/donate/{{$detProject->_id}}" method="post">
         <div class="content ui form">
           <div class="field">
             <textarea name="description" placeholder="Description"></textarea>
