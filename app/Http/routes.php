@@ -36,3 +36,11 @@ Route::get('/profile', 'ProfileController@index');
 Route::post('/profile', 'ProfileController@save');
 Route::post('/profile/image', 'ProfileController@image');
 Route::get('/members/{id}', 'ProfileController@view');
+
+// Message
+Route::get('/members/{id}/message', 'MessageController@compose');
+Route::post('/members/{id}/message', 'MessageController@send');
+Route::post('/messages/delete', 'MessageController@delete');
+Route::get('/messages/{id}', 'MessageController@reply');
+Route::post('/messages/{id}', 'MessageController@respond');
+Route::get('/messages', 'MessageController@inbox');
