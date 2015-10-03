@@ -6,6 +6,12 @@
     <div class="six wide column">
         <div class="ui medium image">
             <img src="{{$user->image ? URL::to('/').$user->image : '#'}}" class="ui medium image" />
+            <br/>
+            @if($user->_id !== \Auth::user()->_id)
+            <a href="/members/{{$user->_id}}/message" class="ui labeled icon button">
+                <i class="mail icon"></i> Message
+            </a>
+            @endif
         </div>
     </div>
     <div class="ten wide column">
