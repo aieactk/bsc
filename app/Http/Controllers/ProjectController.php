@@ -127,11 +127,12 @@ class ProjectController extends Controller {
         }
     }
 
-    public function donate(Request $request){
-      return $this->checkout($request->description, $request->amount);
+    public function donate(Request $request, $id){
+      return $this->checkout($id, 
+              $request->input('description'), $request->input('amount'));
     }
 
-    private function checkout($desc, $value)
+    private function checkout($id, $desc, $value)
     {
         if(false === is_numeric($value) || $value <= 0) {
             throw new \Exception('Price must not be less than 0');
@@ -162,8 +163,9 @@ class ProjectController extends Controller {
             ->setDescription($desc);
 
         $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl('http://localhost:8080/thank-you')
-            ->setCancelUrl('http://localhost:8080/thank-you');
+        $redirect_urls
+            ->setReturnUrl('http://localhost:8000/thank-you/'.$id)
+            ->setCancelUrl('http://localhost:8000/cancel/'.$id);
 
         $payment = new Payment();
         $payment->setIntent('Sale')
@@ -191,7 +193,7 @@ class ProjectController extends Controller {
         }
 
         // add payment ID to session
-        \Session::put('paypal_payment_id', $payment->getId());
+        \Session::put('paypal_payment', $payment);
 
         if(isset($redirect_url)) {
             // redirect to paypal
@@ -202,8 +204,21 @@ class ProjectController extends Controller {
             ->with('error', 'Unknown error occurred');
     }
 
-    public function thankYou()
+    public function thankYou($id)
     {
-      return view('Project/thanks');
+        /* @var $payment Payment */
+        $payment = \Session::get('paypal_payment');
+        $project = \App\Models\Project::findOrFail($id);
+        foreach($payment->getTransactions() as $transaction) {
+            /* @var $transaction Transaction */
+            $project->amount += $transaction->getAmount()->getTotal();
+            if($project->goal >= $project->amount) {
+                $project->achieved = true;
+            }
+        }
+        \Session::forget('paypal_payment');
+        $project->save();
+        
+        return view('Project/thanks');
     }
 }
