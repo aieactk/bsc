@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 //use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\User;
 use App\Models\Project;
 use Auth;
 
@@ -19,7 +20,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-      $projects = Project::all()->where('statusProject', '!=', 'deleted');
+      $projects = Project::where('statusProject', '!=', 'deleted')->get();//Project::all()->where('statusProject');
 
       return view('Project/project', ['projects' => $projects]);//
     }
@@ -37,8 +38,9 @@ class ProjectController extends Controller
     public function viewDetail($projectID)
     {
       $detProject = Project::findOrFail($projectID);
+      $user = User::where($detProject->created_by, '=', '_id');
 
-      return view('Project/projectDetail', compact('detProject'));
+      return view('Project/projectDetail', compact('detProject', 'user'));
     }
 
     /**
@@ -52,8 +54,8 @@ class ProjectController extends Controller
       {
         $image = $request->file('mainImage');
         $filename = time() . '-' . $image->getClientOriginalName();
-        $path = public_path('image/' . $filename);
-        $destPath = public_path('image/');
+        $path = public_path('upload/project/' . $filename);
+        $destPath = public_path('upload/project/');
         $request->file('mainImage')->move($destPath, $filename);
 
         $user = Auth::user();
@@ -65,7 +67,7 @@ class ProjectController extends Controller
         $project->category = $request->category;
         $project->description = $request->description;
         $project->goal = $request->goal;
-        $project->duration = $request->duration;
+        $project->duration = $request->endDate;
         $project->save();
 
         return redirect('projects'); //
