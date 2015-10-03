@@ -48,6 +48,32 @@ return false;">
       <form action="/donate" method="post">
         <div class="content ui form">
           <div class="field">
+            <p>Are you sure want to delete this project ?</p>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="two fluid ui inverted buttons">
+            <div class="ui red basic inverted button" id="no_btn">
+              <i class="remove icon"></i>
+              No
+            </div>
+            <button class="ui green basic inverted button">
+              <i class="checkmark icon"></i>
+              Yes
+            </button>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="ui basic modal">
+      <div class="header">
+        Donation Amount
+      </div>
+      <form action="/donate" method="post">
+        <div class="content ui form">
+          <div class="field">
             <textarea name="description" placeholder="Description"></textarea>
           </div>
           <div class="field">
