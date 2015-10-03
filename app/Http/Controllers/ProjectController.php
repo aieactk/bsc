@@ -7,7 +7,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 //use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\User;
+use App\User;
 use App\Models\Project;
 use Auth;
 
@@ -38,8 +38,7 @@ class ProjectController extends Controller
     public function viewDetail($projectID)
     {
       $detProject = Project::findOrFail($projectID);
-      $user = User::where($detProject->created_by, '=', '_id');
-
+      $user = $detProject->creator;
       return view('Project/projectDetail', compact('detProject', 'user'));
     }
 
