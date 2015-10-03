@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
-//use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Models\Project;
 use Auth;
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Api\Transaction;
+use PayPal\Api\Amount;
+use PayPal\Api\ItemList;
+use PayPal\Api\Item;
+use PayPal\Api\Payment;
+use PayPal\Api\RedirectUrls;
 
 class ProjectController extends Controller {
 
@@ -33,10 +40,12 @@ class ProjectController extends Controller {
         }
     }
 
-    public function viewDetail($projectID) {
-        $detProject = Project::findOrFail($projectID);
-        $user = $detProject->creator;
-        return view('Project/projectDetail', compact('detProject', 'user'));
+    public function viewDetail($projectID)
+    {
+      $detProject = Project::findOrFail($projectID);
+      $user = $detProject->creator;
+
+      return view('Project/projectDetail', compact('detProject', 'user'));
     }
 
     /**
@@ -115,5 +124,80 @@ class ProjectController extends Controller {
             return redirect('auth/login');
         }
     }
+    
+    private function checkout($desc, $value)
+    {
+        if(false === is_numeric($value) || $value <= 0) {
+            throw new \Exception('Price must not be less than 0');
+        }
+        $paypal_conf = Config::get('paypal');
+        $api = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
+        $api->setConfig($paypal_conf['settings']);
+        
+        $payer = new Payer();
+        $payer->setPaymentMethod('paypal');
 
+        $donation = new Item();
+        $donation->setName('Item 1') // item name
+            ->setCurrency('USD')
+            ->setQuantity(1)
+            ->setPrice($value);
+        
+        $list = new ItemList();
+        $list->setItems(array($donation));
+        
+        $amount = new Amount();
+        $amount->setCurrency('USD')
+            ->setTotal($value);
+        
+        $transaction = new Transaction();
+        $transaction->setAmount($amount)
+            ->setItemList($list)
+            ->setDescription($desc);
+        
+        $redirect_urls = new RedirectUrls();
+        $redirect_urls->setReturnUrl(URL::route('payment.status'))
+            ->setCancelUrl(URL::route('payment.status'));
+
+        $payment = new Payment();
+        $payment->setIntent('Sale')
+            ->setPayer($payer)
+            ->setRedirectUrls($redirect_urls)
+            ->setTransactions(array($transaction));
+
+        try {
+            $payment->create($api);
+        } catch (\PayPal\Exception\PPConnectionException $ex) {
+            if (\Config::get('app.debug')) {
+                echo "Exception: " . $ex->getMessage() . PHP_EOL;
+                $err_data = json_decode($ex->getData(), true);
+                exit;
+            } else {
+                die('Some error occur, sorry for inconvenient');
+            }
+        }
+        
+        foreach($payment->getLinks() as $link) {
+            if($link->getRel() == 'approval_url') {
+                $redirect_url = $link->getHref();
+                break;
+            }
+        }
+
+        // add payment ID to session
+        Session::put('paypal_payment_id', $payment->getId());
+
+        if(isset($redirect_url)) {
+            // redirect to paypal
+            return Redirect::away($redirect_url);
+        }
+
+        return Redirect::route('original.route')
+            ->with('error', 'Unknown error occurred');
+    }
+
+    public function thankYou()
+    {
+      return view('Project/thanks');
+    }
 }

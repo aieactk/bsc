@@ -9,7 +9,10 @@
         "laravel/framework": "5.1.*",
         "jenssegers/mongodb": "^2.2",
         "jenssegers/mongodb-session": "^1.1",
-        "jenssegers/mongodb-sentry": "^1.0"
+        "jenssegers/mongodb-sentry": "^1.0",
+        "paypal/merchant-sdk-php": "^3.9",
+        "paypal/buttonmanager-sdk-php": "^3.9",
+        "paypal/rest-api-sdk-php": "^1.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
