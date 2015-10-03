@@ -64,7 +64,7 @@
         </div>
 
         <div class="ui inverted masthead centered segment" 
-             style='min-height:600px;'>
+             style="min-height:600px;padding-bottom:50px;">
             <div class="ui page grid">
                 <div class="column">
                     @yield('content')
