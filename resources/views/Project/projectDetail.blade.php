@@ -9,8 +9,8 @@
     <div class="ui six wide column">
         <h1 class="ui left aligned container">{!! $detProject->title !!}</h1>
         <p class="ui left aligned">by {!! $user->first_name . ' ' . $user->last_name !!}</p>
-        <h2 class="ui left aligned"><i class="dollar icon">{{ number_format(15000, 0, ',', '.') }}</i></h2>
-        <p class="ui left aligned">of <i class="dollar icon">{!! number_format($detProject->goal, 0, ',', '.') !!}</i></p>
+        <h2 class="ui left aligned"><i class="dollar icon">{{ number_format(15000, 0, ",", ".") }}</i></h2>
+        <p class="ui left aligned">of <i class="dollar icon">{!! number_format($detProject->goal, 0, ",", ".") !!}</i></p>
         <div class="ui progress teal fluid" data-percent="(15000/{!! $detProject->goal !!})*100">
             <div class="bar" style="transition-duration: 300ms; width: {!! 15000/$detProject->goal*100 !!}%;"></div>
             <div class="label">{!! round(15000/$detProject->goal*100, 2) !!}% Funded</div>
@@ -43,9 +43,9 @@ return false;">
 
     <div class="ui basic modal">
       <div class="header">
-        Donation Amount
+        Delete
       </div>
-      <form action="/donate/{{$detProject->_id}}" method="post">
+      <form action="#" method="post">
         <div class="content ui form">
           <div class="field">
             <p>Are you sure want to delete this project ?</p>
@@ -53,7 +53,7 @@ return false;">
         </div>
         <div class="actions">
           <div class="two fluid ui inverted buttons">
-            <div class="ui red basic inverted button" id="no_btn">
+            <div class="ui red basic inverted button" id="no_btn1">
               <i class="remove icon"></i>
               No
             </div>
