@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Models\Project;
@@ -17,6 +18,7 @@ use PayPal\Api\ItemList;
 use PayPal\Api\Item;
 use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
+use PayPal\Api\Payer;
 
 class ProjectController extends Controller {
 
@@ -124,16 +126,20 @@ class ProjectController extends Controller {
             return redirect('auth/login');
         }
     }
-    
+
+    public function donate(Request $request){
+      return $this->checkout($request->description, $request->amount);
+    }
+
     private function checkout($desc, $value)
     {
         if(false === is_numeric($value) || $value <= 0) {
             throw new \Exception('Price must not be less than 0');
         }
-        $paypal_conf = Config::get('paypal');
+        $paypal_conf = \Config::get('paypal');
         $api = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
         $api->setConfig($paypal_conf['settings']);
-        
+
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
@@ -142,22 +148,22 @@ class ProjectController extends Controller {
             ->setCurrency('USD')
             ->setQuantity(1)
             ->setPrice($value);
-        
+
         $list = new ItemList();
         $list->setItems(array($donation));
-        
+
         $amount = new Amount();
         $amount->setCurrency('USD')
             ->setTotal($value);
-        
+
         $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($list)
             ->setDescription($desc);
-        
+
         $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::route('payment.status'))
-            ->setCancelUrl(URL::route('payment.status'));
+        $redirect_urls->setReturnUrl('http://localhost:8080/thank-you')
+            ->setCancelUrl('http://localhost:8080/thank-you');
 
         $payment = new Payment();
         $payment->setIntent('Sale')
@@ -176,7 +182,7 @@ class ProjectController extends Controller {
                 die('Some error occur, sorry for inconvenient');
             }
         }
-        
+
         foreach($payment->getLinks() as $link) {
             if($link->getRel() == 'approval_url') {
                 $redirect_url = $link->getHref();
@@ -185,14 +191,14 @@ class ProjectController extends Controller {
         }
 
         // add payment ID to session
-        Session::put('paypal_payment_id', $payment->getId());
+        \Session::put('paypal_payment_id', $payment->getId());
 
         if(isset($redirect_url)) {
             // redirect to paypal
-            return Redirect::away($redirect_url);
+            return \Redirect::away($redirect_url);
         }
 
-        return Redirect::route('original.route')
+        return \Redirect::route('original.route')
             ->with('error', 'Unknown error occurred');
     }
 
