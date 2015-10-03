@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('contents')
+@section('content')
 <div class="ui container">
   <h1>Edit Project</h1>
   <form class="ui form" action="/update-project" method="post" enctype="multipart/form-data">

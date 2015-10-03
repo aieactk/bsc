@@ -128,4 +128,9 @@ class ProjectController extends Controller
         return redirect('auth/login');
       }
     }
+
+    public function thankYou()
+    {
+      return view('Project/thanks');
+    }
 }
