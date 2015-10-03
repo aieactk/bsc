@@ -5,7 +5,7 @@ return array(
     'secret' => 'EFEqasByuaK-yVx6uirkz3iaomLVKxbRFqeO8VjVXacz1OHsy0fSoCfnqZYuhnUPNyXyETt7mNdFIsv0',
 
     /**
-     * SDK configuration 
+     * SDK configuration
      */
     'settings' => array(
         /**

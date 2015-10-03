@@ -22,7 +22,7 @@ class Message extends Model
     
     public function replies()
     {
-        return $this->hasMany('\App\Message', 'context');
+        return $this->hasMany('\App\Models\Message', 'context');
     }
     
     public function toMember()

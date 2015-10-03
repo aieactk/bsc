@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "9f2c94ec628b5cacc76c9e10823246aa",
+    "content-hash": "94633f69c5fa219e7799fc5d9927be24",
     "packages": [
         {
             "name": "cartalyst/sentry",

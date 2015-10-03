@@ -33,21 +33,43 @@ return false;">
         <p>&nbsp;</p>
         @if(Auth::check() && $detProject->created_by === Auth::user()->_id)
         <a href="/delete-project/{{$detProject->_id}}">
-            <button class="ui circular negative remove icon button">
+            <button class="ui circular negative remove icon button" id="del-btn">
                 <i class="remove icon"></i>
                 Delete Project
             </button>
         </a>
         @endif
     </div>
-    <div class="ui modal">
-      <div class="header">Payment</div>
-      <div class="content">
-        <input type="text" name="creditCardName" placeholder="Credit Card Name">
-        <p></p>
-        <p></p>
+
+    <div class="ui basic modal">
+      <div class="header">
+        Donation Amount
       </div>
+      <form action="/donate/{{$detProject->_id}}" method="post">
+        <div class="content ui form">
+          <div class="field">
+            <textarea name="description" placeholder="Description"></textarea>
+          </div>
+          <div class="field">
+            <input type="number" name="amount" placeholder="Donation Amount">
+          </div>
+        </div>
+        <div class="actions">
+          <div class="two fluid ui inverted buttons">
+            <div class="ui red basic inverted button" id="no_btn">
+              <i class="remove icon"></i>
+              No
+            </div>
+            <button class="ui green basic inverted button">
+              <i class="checkmark icon"></i>
+              Yes
+            </button>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          </div>
+        </div>
+      </form>
     </div>
+
     <div id="disqus_thread" class="sixteen wide column"></div>
 </div>
 @endsection
@@ -63,5 +85,23 @@ return false;">
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
+
+        $('#donate_btn').click(function(){
+          $('.ui.basic.modal').modal('show')});
+
+        $('#no_btn').click(function(){
+          $('.ui.basic.modal').modal('hide')
+        });
+
+        $('#yes_button').click(function(){
+          $.ajax({
+            url: '/donate',
+            type: "post",
+            data: {'desc': $('input[name=description]').val(), 'val': $('input[name=amount]').val(), '_token': $('input[name=_token]').val()},
+            success: function(data){
+              alert(data);
+            }
+          })
+        });
     </script>
 @endsection
