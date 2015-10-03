@@ -21,8 +21,8 @@ Route::get('/project/{projectID}',      'ProjectController@viewDetail');
 Route::get('/edit-project/{projectID}', 'ProjectController@viewEditDetail');
 Route::post('/update-project',          'ProjectController@updateProject');
 Route::get('/delete-project/{id}',      'ProjectController@deleteProject');
-Route::get('/thank-you',                'ProjectController@thankYou');
-Route::post('/donate',     'ProjectController@donate');
+Route::get('/thank-you/{id}',           'ProjectController@thankYou');
+Route::post('/donate/{id}',             'ProjectController@donate');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
