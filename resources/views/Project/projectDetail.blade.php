@@ -33,7 +33,7 @@ return false;">
         <p>&nbsp;</p>
         @if(Auth::check() && $detProject->created_by === Auth::user()->_id)
         <a href="/delete-project/{{$detProject->_id}}">
-            <button class="ui circular negative remove icon button">
+            <button class="ui circular negative remove icon button" id="del-btn">
                 <i class="remove icon"></i>
                 Delete Project
             </button>
