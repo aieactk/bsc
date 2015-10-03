@@ -12,7 +12,7 @@
                     </div>
                 </div>
             </div>
-            <img src="{!! asset('image/' . $project->mainImage) !!}" />
+            <img src="{!! asset('upload/project/' . $project->mainImage) !!}" />
         </div>
         <div class="content">
             <a class="header" href="/project/{{$project->_id}}">{{$project->title}}</a>
@@ -22,12 +22,8 @@
                 </span>
             </div>
         </div>
-        <div class="extra content">
-            <i class="dollar icon"></i>Rp. {{$project->goal}}
-            <a>
-                <i class="calendar icon"></i>Until {{$project->duration}}
-            </a>
-        </div>
+        <div class="extra content"><i class="dollar icon"></i>Rp. {{$project->goal}}</div>
+        <div class="extra content"><i class="calendar icon"></i>until {{$project->duration}}</div>
     </div>
     @endforeach
 </div>

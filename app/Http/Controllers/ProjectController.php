@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 //use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 use App\Models\Project;
 use Auth;
 
@@ -32,10 +33,11 @@ class ProjectController extends Controller {
         }
     }
 
-    public function viewDetail($projectID) {
-        $detProject = Project::findOrFail($projectID);
-
-        return view('Project/projectDetail', compact('detProject'));
+    public function viewDetail($projectID)
+    {
+      $detProject = Project::findOrFail($projectID);
+      $user = $detProject->creator;
+      return view('Project/projectDetail', compact('detProject', 'user'));
     }
 
     /**
@@ -43,30 +45,33 @@ class ProjectController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function createProject(Request $request) {
-        if (Auth::check()) {
-            $image = $request->file('mainImage');
-            $filename = time() . '-' . $image->getClientOriginalName();
-            $path = public_path('image/' . $filename);
-            $destPath = public_path('image/');
-            $request->file('mainImage')->move($destPath, $filename);
+    public function createProject(Request $request)
+    {
+      if(Auth::check())
+      {
+        $image = $request->file('mainImage');
+        $filename = time() . '-' . $image->getClientOriginalName();
+        $path = public_path('upload/project/' . $filename);
+        $destPath = public_path('upload/project/');
+        $request->file('mainImage')->move($destPath, $filename);
 
-            $user = Auth::user();
+        $user = Auth::user();
 
-            $project = new Project;
-            $project->title = $request->title;
-            $project->mainImage = $filename;
-            $project->created_by = $user->_id;
-            $project->category = $request->category;
-            $project->description = $request->description;
-            $project->goal = $request->goal;
-            $project->duration = $request->duration;
-            $project->save();
+        $project = new Project;
+        $project->title = $request->title;
+        $project->mainImage = $filename;
+        $project->created_by = $user->_id;
+        $project->category = $request->category;
+        $project->description = $request->description;
+        $project->goal = $request->goal;
+        $project->duration = $request->endDate;
+        $project->save();
 
-            return redirect('projects'); //
-        } else {
-            return redirect('auth/login');
-        }
+        return redirect('projects'); //
+      }
+      else{
+        return redirect('auth/login');
+      }
     }
 
     public function viewEditDetail($projectID) {
