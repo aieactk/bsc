@@ -100,8 +100,6 @@
 
 
         @section('javascripts')
-        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="//cdn.jsdelivr.net/semantic-ui/2.1.4/semantic.min.js"></script>
         <script>
         </script>
         @show
