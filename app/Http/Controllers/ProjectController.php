@@ -7,7 +7,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 //use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
-use App\Project;
+use App\Models\Project;
 
 class ProjectController extends Controller
 {
