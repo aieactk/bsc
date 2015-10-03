@@ -9,11 +9,13 @@
     <h1 class="ui inverted centered header">
         Blessed to bless others
     </h1>
-    <p class="ui centered lead">At least he won't reach his highest potential unless<br/>you enroll him in Cat University's 2013 class.</p>
+    <p class="ui centered lead">Why Blessing Supply Chain?</p>
+    @if(!Auth::check())
     <a href="#" class="large basic inverted animated fade ui button">
-        <div class="visible content">Come to ICU 2013</div>
-        <div class="hidden content">Register Now</div>
+        <div class="visible content">Start become blessing</div>
+        <div class="hidden content">And spread God's love</div>
     </a>
+    @endif
     <div class="ui centerted image">
         <img src="/image/banner.png" />
     </div>

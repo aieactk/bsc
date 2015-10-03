@@ -41,11 +41,11 @@
                                 </div>
                             </div>-->
                             @if(Auth::check())
-                            <a class="ui item">
+                            <a class="ui item" href="/auth/logout">
                                 Logout
                             </a>
                             @else
-                            <a class="ui item">
+                            <a class="ui item" href="/auth/login">
                                 Login
                             </a>
                             @endif
@@ -92,8 +92,6 @@
 
                     </div>
                 </div>
-
-
 
             </div>
         </div>
