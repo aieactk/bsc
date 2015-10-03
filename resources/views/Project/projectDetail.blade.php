@@ -8,7 +8,7 @@
     </div>
     <div class="ui six wide column">
         <h1 class="ui left aligned container">{!! $detProject->title !!}</h1>
-        <p class="ui left aligned">by {!! $user->first_name . $user->last_name !!}</p>
+        <p class="ui left aligned">by {!! $user->first_name . ' ' . $user->last_name !!}</p>
         <h2 class="ui left aligned"><i class="dollar icon">{{ number_format(15000, 0, ',', '.') }}</i></h2>
         <p class="ui left aligned">of <i class="dollar icon">{!! number_format($detProject->goal, 0, ',', '.') !!}</i></p>
         <div class="ui progress teal fluid" data-percent="(15000/{!! $detProject->goal !!})*100">
@@ -31,12 +31,14 @@ return false;">
             </button>
         </a>
         <p>&nbsp;</p>
+        @if(Auth::check() && $detProject->created_by === Auth::user)
         <a href="/delete-project/{{$detProject->_id}}">
             <button class="ui circular negative remove icon button">
                 <i class="remove icon"></i>
                 Delete Project
             </button>
         </a>
+        @endif
     </div>
     <div id="disqus_thread" class="sixteen wide column"></div>
 </div>

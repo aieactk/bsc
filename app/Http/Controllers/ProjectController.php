@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\User;
+use App\User;
 use App\Models\Project;
 use Auth;
 use PayPal\Rest\ApiContext;
@@ -18,28 +18,26 @@ use PayPal\Api\Item;
 use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
 
-class ProjectController extends Controller
-{
+class ProjectController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-      $projects = Project::where('statusProject', '!=', 'deleted')->get();//Project::all()->where('statusProject');
+    public function index() {
+        $projects = Project::where('statusProject', '!=', 'deleted')
+                            ->get();
 
-      return view('Project/project', ['projects' => $projects]);//
+        return view('Project/project', ['projects' => $projects]); //
     }
 
-    public function createProjectForm()
-    {
-      if(Auth::check()){
-        return view('Project/createProject');
-      }
-      else{
-        return redirect('auth/login');
-      }
+    public function createProjectForm() {
+        if (Auth::check()) {
+            return view('Project/createProject');
+        } else {
+            return redirect('auth/login');
+        }
     }
 
     public function viewDetail($projectID)
@@ -84,57 +82,50 @@ class ProjectController extends Controller
       }
     }
 
-    public function viewEditDetail($projectID)
-    {
-      if(Auth::check())
-      {
-        $detProject = Project::findOrFail($projectID);
+    public function viewEditDetail($projectID) {
+        if (Auth::check()) {
+            $detProject = Project::findOrFail($projectID);
 
-        return view('Project/editProject', compact('detProject'));
-      }
-      else {
-        return redirect('auth/login');
-      }
+            return view('Project/editProject', compact('detProject'));
+        } else {
+            return redirect('auth/login');
+        }
     }
 
-    public function updateProject(Request $request)
-    {
-      if(Auth::check()){
-        $id = $request->input('id');
-        $detProject = Project::findOrFail($id);
+    public function updateProject(Request $request) {
+        if (Auth::check()) {
+            $id = $request->input('id');
+            $detProject = Project::findOrFail($id);
 
-        $image = $request->file('mainImage');
-        $filename = time() . '-' . $image->getClientOriginalName();
-        $path = public_path('image/' . $filename);
-        $destPath = public_path('image/');
-        $request->file('mainImage')->move($destPath, $filename);
+            $image = $request->file('mainImage');
+            $filename = time() . '-' . $image->getClientOriginalName();
+            $path = public_path('image/' . $filename);
+            $destPath = public_path('image/');
+            $request->file('mainImage')->move($destPath, $filename);
 
-        $detProject->mainImage = $filename;
-        $detProject->category = $request->input('category');
-        $detProject->description = $request->input('description');
-        //$project->goal = $request->goal;
-        //$project->duration = $request->duration;
-        $detProject->save();
+            $detProject->mainImage = $filename;
+            $detProject->category = $request->input('category');
+            $detProject->description = $request->input('description');
+            //$project->goal = $request->goal;
+            //$project->duration = $request->duration;
+            $detProject->save();
 
-        return redirect('project/'.$id);
-      }
-      else{
-        return redirect('auth/login');
-      }
+            return redirect('project/' . $id);
+        } else {
+            return redirect('auth/login');
+        }
     }
 
-    public function deleteProject($id)
-    {
-      if(Auth::check()){
-        $detProject = Project::findOrFail($id);
-        $detProject->statusProject = 'deleted';
-        $detProject->save();
+    public function deleteProject($id) {
+        if (Auth::check()) {
+            $detProject = Project::findOrFail($id);
+            $detProject->statusProject = 'deleted';
+            $detProject->save();
 
-        return redirect('projects');
-      }
-      else{
-        return redirect('auth/login');
-      }
+            return redirect('projects');
+        } else {
+            return redirect('auth/login');
+        }
     }
     
     private function checkout($desc, $value)

@@ -20,7 +20,7 @@
             <div class="ui page grid">
                 <div class="column">
                     <div class="ui secondary pointing menu">
-                        <a class="logo item">
+                        <a class="item" href="/">
                             Blessing Supply Chain
                         </a>
                         <a class="{{ Request::path() === '/' ? 'active' : '' }} item"
@@ -31,10 +31,16 @@
                            href="/projects">
                             <i class="list layout icon"></i> Projects
                         </a>
+                        @if(Auth::check())
                         <a class="{{ Request::path() === '/profile' ? 'active' : '' }} item"
                            href="/profile">
                             <i class="user icon"></i> Profile
                         </a>
+                        <a class="{{ Request::path() === '/messages' ? 'active' : '' }} item"
+                           href="/messages">
+                            <i class="archive icon"></i> Messages
+                        </a>
+                        @endif
                         <div class="right menu">
 <!--                            <div class="item">
                                 <div class="ui icon input">
@@ -57,7 +63,8 @@
             </div>
         </div>
 
-        <div class="ui inverted masthead centered segment">
+        <div class="ui inverted masthead centered segment" 
+             style='min-height:600px;'>
             <div class="ui page grid">
                 <div class="column">
                     @yield('content')
@@ -77,11 +84,11 @@
                         </div>
                     </div>
                     <div class="column">
-                        <h5 class="ui inverted header">Community</h5>
+                        <h5 class="ui inverted header">Pages</h5>
                         <div class="ui inverted link list">
-                            <a class="item">BBS</a>
-                            <a class="item">Careers</a>
+                            <a class="item">About Us</a>
                             <a class="item">Privacy Policy</a>
+                            <a class="item">Terms & Condition</a>
                         </div>
                     </div>
 

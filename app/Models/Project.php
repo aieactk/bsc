@@ -12,4 +12,8 @@ class Project extends Eloquent
   protected $dates = ['deleted_at'];
   protected $collection = 'project_collection';
     //
+
+  public function creator(){
+    return $this->belongsTo('\App\User', 'created_by');
+  }
 }
