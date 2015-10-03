@@ -1,6 +1,12 @@
 @extends('layouts.master')
 @section('content')
-<h1>This is List Project</h1>
+<h1>
+    This is List Project
+</h1>
+<a href="/project/create" class="ui button green"
+   style="margin-bottom: 20px;">
+    Start your own project
+</a>
 <div class="ui four stackable cards">
     @foreach ($projects as $project)
     <div class="ui card">

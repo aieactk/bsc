@@ -19,7 +19,8 @@
     </div>
 
     <div class="field">
-        <button type="submit" class="ui button blue">Login</button>
+        <button type="submit" class="ui button blue">Login</button>&nbsp;
+        <a href="/auth/register" class="ui button green">Register</a>
     </div>
 </form>
 @endsection

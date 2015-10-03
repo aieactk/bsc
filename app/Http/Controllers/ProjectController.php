@@ -20,7 +20,7 @@ class ProjectController extends Controller {
      */
     public function index() {
         $projects = Project::where('statusProject', '!=', 'deleted')
-                            ->get();
+                ->get();
 
         return view('Project/project', ['projects' => $projects]); //
     }
@@ -33,11 +33,10 @@ class ProjectController extends Controller {
         }
     }
 
-    public function viewDetail($projectID)
-    {
-      $detProject = Project::findOrFail($projectID);
-      $user = $detProject->creator;
-      return view('Project/projectDetail', compact('detProject', 'user'));
+    public function viewDetail($projectID) {
+        $detProject = Project::findOrFail($projectID);
+        $user = $detProject->creator;
+        return view('Project/projectDetail', compact('detProject', 'user'));
     }
 
     /**
@@ -45,33 +44,30 @@ class ProjectController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function createProject(Request $request)
-    {
-      if(Auth::check())
-      {
-        $image = $request->file('mainImage');
-        $filename = time() . '-' . $image->getClientOriginalName();
-        $path = public_path('upload/project/' . $filename);
-        $destPath = public_path('upload/project/');
-        $request->file('mainImage')->move($destPath, $filename);
+    public function createProject(Request $request) {
+        if (Auth::check()) {
+            $image      = $request->file('mainImage');
+            $filename   = time() . '-' . $image->getClientOriginalName();
+            $path       = public_path('upload/project/' . $filename);
+            $destPath   = public_path('upload/project/');
+            $request->file('mainImage')->move($destPath, $filename);
 
-        $user = Auth::user();
+            $user = Auth::user();
 
-        $project = new Project;
-        $project->title = $request->title;
-        $project->mainImage = $filename;
-        $project->created_by = $user->_id;
-        $project->category = $request->category;
-        $project->description = $request->description;
-        $project->goal = $request->goal;
-        $project->duration = $request->endDate;
-        $project->save();
+            $project = new Project;
+            $project->title         = $request->title;
+            $project->mainImage     = $filename;
+            $project->created_by    = $user->_id;
+            $project->category      = $request->category;
+            $project->description   = $request->description;
+            $project->goal          = $request->goal;
+            $project->duration      = $request->endDate;
+            $project->save();
 
-        return redirect('projects'); //
-      }
-      else{
-        return redirect('auth/login');
-      }
+            return redirect('projects'); //
+        } else {
+            return redirect('auth/login');
+        }
     }
 
     public function viewEditDetail($projectID) {
@@ -86,13 +82,13 @@ class ProjectController extends Controller {
 
     public function updateProject(Request $request) {
         if (Auth::check()) {
-            $id = $request->input('id');
+            $id         = $request->input('id');
             $detProject = Project::findOrFail($id);
 
-            $image = $request->file('mainImage');
-            $filename = time() . '-' . $image->getClientOriginalName();
-            $path = public_path('image/' . $filename);
-            $destPath = public_path('image/');
+            $image      = $request->file('mainImage');
+            $filename   = time() . '-' . $image->getClientOriginalName();
+            $path       = public_path('image/' . $filename);
+            $destPath   = public_path('image/');
             $request->file('mainImage')->move($destPath, $filename);
 
             $detProject->mainImage = $filename;
