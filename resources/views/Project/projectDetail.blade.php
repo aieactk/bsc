@@ -15,7 +15,7 @@
             <div class="bar" style="transition-duration: 300ms; width: {!! 15000/$detProject->goal*100 !!}%;"></div>
             <div class="label">{!! round(15000/$detProject->goal*100, 2) !!}% Funded</div>
         </div>
-        <button class="ui blue massive button center fluid">Donate Now</button>
+        <button class="ui blue massive button center fluid" id="donate_btn">Donate Now</button>
         <h2 class="ui left aligned">Share this on</h2>
         <button class="ui circular facebook icon button">
             <i class="facebook icon"></i>
@@ -42,15 +42,16 @@ return false;">
 </div>
 @endsection
 @section('javascripts')
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'blessingsupplychain';
+    @parent
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'blessingsupplychain';
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
 @endsection
