@@ -14,7 +14,7 @@
         CURATED BY CREDIBLE ORGANIZATION / INDIVIDUAL
     </p>
     @if(!Auth::check())
-    <a href="#" class="large basic inverted animated fade ui button">
+    <a href="/projects" class="large basic inverted animated fade ui button">
         <div class="visible content">Start become blessing</div>
         <div class="hidden content">And spread God's love</div>
     </a>
