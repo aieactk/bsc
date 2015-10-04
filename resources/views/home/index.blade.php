@@ -11,7 +11,7 @@
     </h1>
     <p class="ui centered lead">
         CREDIBLE ONLINE FUNDRAISING WITH THE SOLE PURPOSE OF BLESSING OTHERS<br />
-        CURATED BY CREDIBLE ORGANIZATION / PERSON
+        CURATED BY CREDIBLE ORGANIZATION / INDIVIDUAL
     </p>
     @if(!Auth::check())
     <a href="#" class="large basic inverted animated fade ui button">
