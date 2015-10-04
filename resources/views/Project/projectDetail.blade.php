@@ -10,7 +10,7 @@
         <h1 class="ui left aligned container">{!! $detProject->title !!}</h1>
         <p class="ui left aligned">by {!! $user->first_name . ' ' . $user->last_name !!}</p>
         <h2 class="ui left aligned"><i class="dollar icon">{{ number_format(15000, 2, ",", ".") }}</i></h2>
-        <p class="ui left aligned">of <i class="dollar icon">{!! number_format($detProject->goal, 2 ",", ".") !!}</i></p>
+        <p class="ui left aligned">of <i class="dollar icon">{!! number_format($detProject->goal, 2, ",", ".") !!}</i></p>
         <div class="ui progress teal fluid" data-percent="(15000/{!! $detProject->goal !!})*100">
             <div class="bar" style="transition-duration: 300ms; width: {!! 15000/$detProject->goal*100 !!}%;"></div>
             <div class="label">{!! round(15000/$detProject->goal*100, 2) !!}% Funded</div>
