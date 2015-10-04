@@ -12,9 +12,9 @@
         <p class="ui left aligned">by {!! $user->first_name . ' ' . $user->last_name !!}</p>
         <h2 class="ui left aligned"><i class="dollar icon">15000</i></h2>
         <p class="ui left aligned">of <i class="dollar icon">{!! $detProject->goal !!}</i></p>
-        <div class="ui progress teal fluid" data-percent="({{ empty($detProject->goal) ? 0 : 15000/ $detProject->goal }}*100)">
-            <div class="bar" style="transition-duration: 300ms; width: {!! 15000/$detProject->goal*100 !!}%;"></div>
-            <div class="label">{!! round(15000/$detProject->goal*100, 2) !!}% Funded</div>
+        <div class="ui progress teal fluid" data-percent="(50)">
+            <div class="bar" style="transition-duration: 300ms; width: 50%;"></div>
+            <div class="label">50% Funded</div>
         </div>
         <button class="ui blue massive button center fluid" id="donate_btn">Donate Now</button>
         <h2 class="ui left aligned">Share this on</h2>
