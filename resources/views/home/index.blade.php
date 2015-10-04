@@ -17,7 +17,7 @@
     </a>
     @endif
     <div class="ui centerted image">
-        <img src="/image/banner.png" />
+        <img src="/image/bsc-front.jpg" />
     </div>
 </div>
 @endsection
