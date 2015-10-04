@@ -6,7 +6,7 @@
 <a href="/create-project" class="ui button green">
     Start your own project
 </a>
-<div id="header-menu" class="ui text menu inverted">
+<div id="header-menu" class="ui text menu">
     <div class="header item">Select category</div>
     <a href="/projects" data-category="all"
        class="item {{ Request::path() === '/projects' ? 'active' : '' }}" >
@@ -27,25 +27,23 @@
 </div>
 <div id="project-container" class="ui four stackable cards">
     @foreach ($projects as $project)
-    <div class="card">
-        <!--<div class="blurring dimmable image">
+    <div class="ui card">
+        <div class="blurring dimmable image">
             <div class="ui dimmer transition hidden">
                 <div class="content">
                     <div class="center">
                         <div class="ui inverted button">Call to Action</div>
                     </div>
                 </div>
-            </div>-->
-        <div class="image">
+            </div>
             <?PHP
             $img = getimagesize(asset('upload/project/' . $project->mainImage));
             $imgH = $img[1] * 150 / $img[0];
             $mTop = ((150 - $imgH) / 2) - 2;
             $css = $img[0] > $img[1] ? 'margin:' . $mTop . 'px 0;' : 'max-height:150px;margin:auto;width:auto;';
             ?>
-            <a href="/project/{{$project->_id}}">
-                <img src="{!! asset('upload/project/' . $project->mainImage) !!}" style="{{ $css }}" />
-            </a>
+            <img src="{!! asset('upload/project/' . $project->mainImage) !!}"
+                 style="{{ $css }}" />
         </div>
         <div class="content">
             <a class="header" href="/project/{{$project->_id}}">{{$project->title}}</a>

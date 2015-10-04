@@ -10,8 +10,8 @@
     <div class="ui six wide column">
         <h1 class="ui left aligned container">{!! $detProject->title !!}</h1>
         <p class="ui left aligned">by {!! $user->first_name . ' ' . $user->last_name !!}</p>
-        <!--<h2 class="ui left aligned"><i class="dollar icon">{{ number_format(15000, 2.00, ",", ".") }}</i></h2>
-        <p class="ui left aligned">of <i class="dollar icon">{!! number_format($detProject->goal, 2.00, ",", ".") !!}</i></p>-->
+        <!--<h2 class="ui left aligned"><i class="dollar icon">{{ number_format(15000, , ",", ".") }}</i></h2>
+        <p class="ui left aligned">of <i class="dollar icon">{!! number_format($detProject->goal, 2, ",", ".") !!}</i></p>-->
         <h2 class="ui left aligned"><i class="dollar icon">15000</i></h2>
         <p class="ui left aligned">of <i class="dollar icon">{!! $detProject->goal !!}</i></p>
         <div class="ui progress teal fluid" data-percent="(15000/{!! $detProject->goal !!})*100">
