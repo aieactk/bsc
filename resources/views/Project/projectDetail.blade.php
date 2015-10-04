@@ -13,7 +13,7 @@
         <!--<h2 class="ui left aligned"><i class="dollar icon">{{ number_format(15000, 2.00, ",", ".") }}</i></h2>
         <p class="ui left aligned">of <i class="dollar icon">{!! number_format($detProject->goal, 2.00, ",", ".") !!}</i></p>-->
         <h2 class="ui left aligned"><i class="dollar icon">15000</i></h2>
-        <p class="ui left aligned">of <i class="dollar icon">$detProject->goal</i></p>
+        <p class="ui left aligned">of <i class="dollar icon">{!! $detProject->goal !!}</i></p>
         <div class="ui progress teal fluid" data-percent="(15000/{!! $detProject->goal !!})*100">
             <div class="bar" style="transition-duration: 300ms; width: {!! 15000/$detProject->goal*100 !!}%;"></div>
             <div class="label">{!! round(15000/$detProject->goal*100, 2) !!}% Funded</div>
