@@ -4,6 +4,7 @@
     <h1>Create New Project</h1>
     <form class="ui form" action="/submit-project" method="post" enctype="multipart/form-data">
         <div class="field">
+            <label>Project Title</label>
             <input name="title" type="text" placeholder="Project Title">
         </div>
         <div class="field">
@@ -15,6 +16,19 @@
             </div>
         </div>
         <div class="field">
+            <label>References</label>
+            <input type="text" placeholder="References">
+        </div>
+        <div class="field">
+            <label>Legal Documents</label>
+            <div class="ui labeled input">
+                <div class="ui label"><label for="file">Browse</label></div>
+                <input type="text" placeholder="KTP, ID" id="fake-file-path2">
+                <input type="file" id="file2" style="display:none">
+            </div>
+        </div>
+        <div class="field">
+            <label>Category</label>
             <select class="ui search dropdown" name="category">
                 <option value="">Choose Category...</option>
                 <option value="education">Education</option>
