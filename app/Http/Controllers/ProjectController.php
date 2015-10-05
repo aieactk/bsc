@@ -29,6 +29,7 @@ class ProjectController extends Controller {
     public function index(Request $req) {
         $cat = $req->get('category');
         $projects = Project::where('statusProject', '!=', 'deleted');
+//                        ->limit(3);
 
         if (!empty($cat) && $cat !== 'all')
             $projects->where('category', '=', $cat);

@@ -49,7 +49,7 @@
             <a class="header" href="/project/{{$project->_id}}">{{$project->title}}</a>
             <div class="meta">
                 <span class="date">
-                    {!! str_limit($project->description, $limit = 150, $end = '...') !!}
+                    {!! str_limit(strip_tags($project->description), $limit = 150, $end = '...') !!}
                 </span>
             </div>
         </div>
